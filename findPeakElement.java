@@ -1,5 +1,5 @@
 public class findPeakElement {
-    public int findPeakElement(int[] nums) {
+    public int findpeakElement(int[] nums) {
         if(nums.length == 1){return nums[0];}
 
         int start = 0, end = nums.length - 1, mid;
