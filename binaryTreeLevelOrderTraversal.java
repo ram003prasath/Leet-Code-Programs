@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 class TreeNode {
     int val;
@@ -10,34 +8,25 @@ class TreeNode {
     TreeNode(int x) { val = x; }
 }
 
-class binaryTreeLevelOrderTraversal{
+class Solution {
+
+    List<List<Integer>> ans = new ArrayList<>();
+
     public List<List<Integer>> levelOrder(TreeNode root) {
+        if(root == null){ return ans; }
         
-        List<List<Integer>> lst = new ArrayList<>();
-        if(root==null){return lst;}
-        int size;
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        TreeNode curNode;
+        bfs(root, 0);
+        return ans;
+    }
 
-        while(!q.isEmpty()){
-            List<Integer> curLevel = new ArrayList<>();
-            size = q.size();
+    public void bfs(TreeNode root, int level){
+        if(root == null) return;
+        if(ans.size() == level) ans.add(new ArrayList<>());
 
-            for(int i=0; i<size; i++){
-                curNode = q.poll();
-                curLevel.add(curNode.val);
-                if(curNode.left!=null){
-                    q.add(curNode.left);
-                }
-                if(curNode.right!=null){
-                    q.add(curNode.right);
-                }
-            }
-            lst.add(curLevel);
+        ans.get(level).add(root.val);
 
-        }
-        return lst;
+        bfs(root.left, level+1);
+        bfs(root.right, level+1);
 
     }
 }
