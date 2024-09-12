@@ -2,10 +2,10 @@ public class FlattenBinaryTreeToLinkedList {
     TreeNode prev = null;
     public void flatten(TreeNode root) {
         if(root == null){ return; }
-        flatten(root.left);
         flatten(root.right);
+        flatten(root.left);
         root.right = prev;
-        root.right = null;
+        root.left = null;
         prev = root;
     }
 }
