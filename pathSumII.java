@@ -23,7 +23,8 @@ public class pathSumII {
         if(root.left == null && root.right == null && root.val == targetSum){
             result.add(new ArrayList<>(lst));
         }
-        findPath(root.left, targetSum - root.val, new ArrayList<>(lst));
-        findPath(root.right, targetSum - root.val, new ArrayList<>(lst));
+        findPath(root.left, targetSum - root.val, lst);
+        findPath(root.right, targetSum - root.val, lst);
+        lst.remove(lst.size()-1);
     }
 }
