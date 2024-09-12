@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BinaryTreeLevelOrderTraversal2 {
-    List<List<Integer>> ans = new ArrayList();
+    List<List<Integer>> ans = new ArrayList<>();
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         if(root == null)
             return ans;
@@ -13,7 +13,7 @@ public class BinaryTreeLevelOrderTraversal2 {
     private void bfs(TreeNode root , int level)
     {
         if(root == null) return ;
-        if(ans.size() == level) ans.add(0,new ArrayList());
+        if(ans.size() == level) ans.add(0,new ArrayList<>());
 
         ans.get(ans.size() - level-1 ).add(root.val);
 
