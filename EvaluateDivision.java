@@ -5,23 +5,20 @@ import java.util.Set;
 import java.util.List;
 
 public class EvaluateDivision {
-
     Map<String, Map<String, Double>> graph = new HashMap<>();
 
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        
         String src, des;
-        double value;
+
         for(int i=0; i<equations.size(); i++){
             src = equations.get(i).get(0);
             des = equations.get(i).get(1);
-            value = values[i];
 
             graph.putIfAbsent(src, new HashMap<>());
-            graph.get(src).put(des, value);
+            graph.get(src).put(des, values[i]);
 
             graph.putIfAbsent(des, new HashMap<>());
-            graph.get(des).put(src, 1/value);
+            graph.get(des).put(src, 1/values[i]);
         }
 
         double result[] = new double[queries.size()];
@@ -32,12 +29,14 @@ public class EvaluateDivision {
             if(!graph.containsKey(src) || !graph.containsKey(des)){
                 result[i] = -1.0;
             }
+            else if(src == des){
+                result[i] = 1.0;
+            }
             else{
                 Set<String> visited = new HashSet<>();
-                result[i] = dfs(src, des, 1.0, visited);
+                result[i] = dfs(src,des, 1.0, visited);
             }
         }
-
         return result;
     }
 
@@ -51,7 +50,7 @@ public class EvaluateDivision {
         if(neighbors.containsKey(des)){
             return value * neighbors.get(des);
         }
-
+        
         for(Map.Entry<String, Double> entry : neighbors.entrySet()){
             String next = entry.getKey();
             double weight = entry.getValue();
@@ -60,7 +59,6 @@ public class EvaluateDivision {
                 return result;
             }
         }
-
         return -1.0;
     }
 }
