@@ -9,7 +9,7 @@ public class EvaluateDivision {
 
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
         String src, des;
-
+        
         for(int i=0; i<equations.size(); i++){
             src = equations.get(i).get(0);
             des = equations.get(i).get(1);
