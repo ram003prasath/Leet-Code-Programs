@@ -3,19 +3,16 @@ import java.util.List;
 
 public class PascalsTriangle {
     public List<List<Integer>> generate(int numRows) {
-        int mat[][] = new int[numRows][numRows];
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>(numRows);
         for(int i=0; i<numRows; i++){
-            result.add(i, new ArrayList<>());
+            result.add(i, new ArrayList<>(i+1));
             for(int j=0; j<numRows; j++){
                 if(j==0 || j==i){
-                    mat[i][j] = 1;
-                    result.get(i).add(mat[i][j]);
+                    result.get(i).add(1);
                     if(j==i){break;}
                 }
                 else{
-                    mat[i][j] = mat[i-1][j-1]+mat[i-1][j];
-                    result.get(i).add(mat[i][j]);
+                    result.get(i).add(result.get(i-1).get(j-1) + result.get(i-1).get(j));
                 }
             }
         }
